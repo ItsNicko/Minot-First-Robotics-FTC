@@ -1,0 +1,412 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+    --steel-blue: #1e3a8a;
+    --industrial-red: #7f1d1d;
+    --duration: 0.6s;
+    --timing: linear;
+    --bg-primary: #020617;
+    --bg-secondary: #0f172a;
+    --bg-tertiary: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #64748b;
+    --border-color: #334155;
+    --accent-blue: #3b82f6;
+    --accent-red: #ef4444;
+    --accent-blue-alpha: rgba(59, 130, 246, 0.2);
+    --accent-blue-alpha2: rgba(30, 58, 138, 0.4);
+    --accent-blue-alpha3: rgba(30, 58, 138, 0.5);
+    --accent-red-alpha: rgba(239, 68, 68, 0.2);
+    --accent-red-alpha2: rgba(127, 29, 29, 0.4);
+    --accent-red-alpha3: rgba(127, 29, 29, 0.5);
+}
+
+[data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #f1f5f9;
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+    --border-color: #94a3b8;
+    --accent-blue: #1d4ed8;
+    --accent-red: #dc2626;
+    --accent-blue-alpha: rgba(29, 78, 216, 0.15);
+    --accent-blue-alpha2: rgba(59, 130, 246, 0.3);
+    --accent-blue-alpha3: rgba(59, 130, 246, 0.4);
+    --accent-red-alpha: rgba(220, 38, 38, 0.15);
+    --accent-red-alpha2: rgba(239, 68, 68, 0.3);
+    --accent-red-alpha3: rgba(239, 68, 68, 0.4);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Center Divider Line */
+.center-line {
+    position: fixed;
+    left: 50%;
+    top: 0;
+    width: 1px;
+    height: 100vh;
+    background: linear-gradient(to bottom, transparent, var(--accent-blue), var(--accent-red), transparent);
+    z-index: 40;
+    pointer-events: none;
+    opacity: 0;
+    animation: fadeInLine 0.8s var(--timing) forwards;
+    transform: skewX(-12deg);
+}
+
+@keyframes fadeInLine {
+    to {
+        opacity: 0.6;
+    }
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-secondary);
+}
+
+/* Diagonal clip paths for hero */
+.clip-diagonal-left {
+    clip-path: polygon(0 0, 100% 0, 75% 100%, 0 100%);
+}
+
+.clip-diagonal-right {
+    clip-path: polygon(25% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/* Hero expansion states */
+#hero.hero-hover-left .hero-bg-left {
+    width: 75%;
+    background-color: rgba(30, 58, 138, 0.35);
+}
+
+#hero.hero-hover-left .hero-bg-right {
+    width: 35%;
+    margin-left: -10%;
+    opacity: 0.6;
+}
+
+#hero.hero-hover-left #center-divider {
+    left: 65%;
+    background: linear-gradient(to bottom, transparent, rgba(59, 130, 246, 0.8), transparent);
+}
+
+#hero.hero-hover-left #center-badge {
+    left: 65%;
+    transform: translateX(-50%) translateY(-50%) scale(1.1);
+}
+
+#hero.hero-hover-right .hero-bg-right {
+    width: 75%;
+    margin-left: -30%;
+    background-color: rgba(127, 29, 29, 0.35);
+}
+
+#hero.hero-hover-right .hero-bg-left {
+    width: 35%;
+    opacity: 0.6;
+}
+
+#hero.hero-hover-right #center-divider {
+    left: 25%;
+    background: linear-gradient(to bottom, transparent, rgba(239, 68, 68, 0.8), transparent);
+}
+
+#hero.hero-hover-right #center-badge {
+    left: 25%;
+    transform: translateX(-50%) translateY(-50%) scale(1.1);
+}
+
+/* Ensure content remains clickable */
+.hero-side {
+    pointer-events: auto;
+}
+
+.hero-side > div:first-child {
+    pointer-events: auto;
+}
+
+/* Hover text enhancements */
+.hero-side:hover h1 {
+    text-shadow: 0 0 30px currentColor;
+}
+
+#hero-left-content:hover h1 {
+    text-shadow: 0 0 40px var(--accent-blue);
+}
+
+#hero-right-content:hover h1 {
+    text-shadow: 0 0 40px var(--accent-red);
+}
+
+/* Background transition smoothness */
+.hero-bg-left,
+.hero-bg-right {
+    will-change: width, margin-left, opacity;
+}
+
+/* Program Dropdown styles */
+#program-dropdown {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+#program-dropdown a {
+    text-decoration: none;
+}
+
+/* Remove old slash animations that we don't want anymore */
+.slash-hover:hover .slash-left,
+.slash-hover:hover .slash-right {
+    transform: none;
+}
+
+/* Scroll Animation Classes */
+.scroll-reveal {
+    transition: opacity var(--duration) var(--timing);
+}
+
+.scroll-reveal-left {
+    transition: all var(--duration) var(--timing);
+}
+
+.scroll-reveal-right {
+    transition: all var(--duration) var(--timing);
+}
+
+.scroll-reveal-center {
+    transition: opacity var(--duration) var(--timing);
+}
+
+/* Visible states (added via JS) */
+.visible {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+}
+
+/* Custom selection colors by side */
+::selection {
+    background: rgba(148, 163, 184, 0.3);
+}
+
+/* Team specific text selections */
+.team-blue ::selection {
+    background: rgba(59, 130, 246, 0.4);
+}
+
+.team-red ::selection {
+    background: rgba(239, 68, 68, 0.4);
+}
+
+/* Enhanced hero colors - using CSS variables for theme support */
+.text-blue-500 {
+    color: var(--accent-blue);
+}
+
+.text-red-500 {
+    color: var(--accent-red);
+}
+
+.text-blue-400 {
+    color: var(--accent-blue);
+}
+
+.text-red-400 {
+    color: var(--accent-red);
+}
+
+.bg-blue-900\/20 {
+    background-color: rgba(59, 130, 246, 0.2);
+}
+
+.bg-red-900\/20 {
+    background-color: rgba(239, 68, 68, 0.2);
+}
+
+/* Ensure proper anchoring in hero expansion */
+#hero.hero-hover-right #hero-right-content {
+    position: absolute;
+    right: 0;
+    left: auto;
+    margin-left: auto;
+    transform: none !important;
+}
+
+#hero.hero-hover-right #hero-right-content > div.ml-auto {
+    margin-right: 0 !important;
+    margin-left: auto !important;
+}
+
+/* Fix potential overflow */
+#hero-right-content {
+    overflow: visible;
+    box-sizing: border-box;
+}
+
+/* Hero hover states - prevent sliding */
+#hero.hero-hover-right {
+    overflow: hidden;
+}
+
+#hero.hero-hover-right #hero-right-content {
+    transform: none !important;
+    transition: none !important;
+}
+
+/* Disable problematic hover transforms that slide content */
+#hero-right-content.hero-side:hover h1,
+#hero.hero-hover-right #hero-right-content h1 {
+    transform: translateX(-8px) !important;
+}
+
+/* Force proper positioning on wide screens */
+@media (min-width: 1024px) {
+    #hero-right-content {
+        width: 45% !important;
+    }
+}
+
+/* Force right side to stay anchored on the right edge */
+#hero-right-content {
+    right: 0 !important;
+    left: auto !important;
+    transform: none !important;
+}
+
+#hero-right-content.hero-side > div:first-child {
+    align-items: flex-end !important;
+    margin-left: auto !important;
+}
+
+/* Prevent sliding on hover expansion - keep text aligned right but not sliding off */
+#hero.hero-hover-right #hero-right-content {
+    transform: none !important;
+    right: 0 !important;
+    margin-left: auto !important;
+}
+
+#hero.hero-hover-right #hero-right-content h1 {
+    transform: translateX(-8px);
+}
+
+/* Force background to not push content */
+#hero-bg-right {
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+}
+
+/* Ensure right content stays within bounds on hover */
+#hero.hero-hover-right #hero-right-content {
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    transform: none !important;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 1024px) {
+    .center-line {
+        display: none;
+    }
+    
+    .hero-left, .hero-right {
+        transform: none !important;
+        opacity: 1 !important;
+    }
+    
+    .team-section {
+        transform: none !important;
+    }
+    
+    #program-dropdown {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    #program-dropdown button {
+        font-size: 10px;
+        padding: 10px 12px;
+    }
+    
+    #hero-right-content {
+        width: 100% !important;
+        position: relative !important;
+    }
+}
+
+/* Subtle grid overlay for technical feel */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        linear-gradient(rgba(128,128,128,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(128,128,128,0.03) 1px, transparent 1px);
+    background-size: 100px 100px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+[data-theme="light"] body::before {
+    background-image: 
+        linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Image treatment */
+img {
+    filter: contrast(1.1) brightness(0.9);
+}
+
+/* Button reset for slash buttons */
+button.slash-hover {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+}
+
+/* Focus states for accessibility */
+a:focus-visible,
+button:focus-visible {
+    outline: 1px solid rgba(148, 163, 184, 0.5);
+    outline-offset: 4px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #020617;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #334155;
+}
